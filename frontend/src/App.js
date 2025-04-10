@@ -9,6 +9,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Appointments from "./pages/Appointments";
 import DoctorSchedule from "./pages/DoctorSchedule";
 import GuestBooking from "./pages/GuestBooking";
+import GuestAppointments from "./pages/GuestAppointments";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/doctor/schedule" element={<DoctorSchedule />} />
         <Route path="/guest-booking" element={<GuestBooking />} />
+        <Route path="/guest-appointments" element={<GuestAppointments />} />
       </Routes>
     </Router>
   );

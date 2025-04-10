@@ -9,16 +9,40 @@ const PublicLanding = () => {
         Book appointments with top healthcare professionals
       </p>
       <div className="d-flex justify-content-center gap-3 flex-wrap">
-        <Button as={Link} to="/login" variant="primary" size="lg">
+        <Button
+          as={Link}
+          to="/login"
+          variant="primary"
+          size="lg"
+          className="px-4"
+        >
           Login
         </Button>
-        <Button as={Link} to="/register" variant="outline-primary" size="lg">
+        <Button
+          as={Link}
+          to="/register"
+          variant="primary"
+          size="lg"
+          className="px-4"
+        >
           Register
         </Button>
-        <Button as={Link} to="/guest-booking" variant="success" size="lg">
+        <Button
+          as={Link}
+          to="/guest-booking"
+          variant="primary"
+          size="lg"
+          className="px-4"
+        >
           Book as Guest
         </Button>
-        <Button as={Link} to="/guest-appointments" variant="info" size="lg">
+        <Button
+          as={Link}
+          to="/guest-appointments"
+          variant="primary"
+          size="lg"
+          className="px-4"
+        >
           View My Appointments
         </Button>
       </div>
