@@ -9,6 +9,7 @@ const {
   getDoctorAppointments,
   updateAppointmentStatus,
   getAllDoctors,
+  getGuestAppointments,
 } = require("../controllers/AppointmentController");
 
 const router = express.Router();
@@ -27,6 +28,7 @@ router.post("/appointments", authenticate, createPatientAppointment);
 //guest routes
 router.get("/guest/doctors", getAllDoctors);
 router.post("/guest/appointment", createGuestAppointment);
+router.get("/guest/appointments", getGuestAppointments);
 
 // Doctor routes
 router.get(

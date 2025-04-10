@@ -140,13 +140,54 @@ exports.createGuestAppointment = async (req, res) => {
       patientId: guest.id,
       doctorId,
     });
-
     res
       .status(201)
       .json({ message: "Appointment created successfully", appointment });
   } catch (error) {
     //console.error("Error creating guest appointment:", error); // Log the error for debugging
     res.status(500).json({ error: "Failed to create appointment" });
+  }
+};
+
+// guests: view their appointments
+exports.getGuestAppointments = async (req, res) => {
+  try {
+    if (!req.query.email) {
+      return res.status(400).json({ error: "Email parameter is required" });
+    }
+
+    // First find the guest user by email
+    const guest = await User.findOne({
+      where: {
+        email: req.query.email,
+        isGuest: true,
+      },
+    });
+
+    if (!guest) {
+      return res.status(404).json({ error: "No guest found with this email" });
+    }
+
+    // Then find their appointments
+    const appointments = await Appointment.findAll({
+      where: { patientId: guest.id },
+      include: [
+        {
+          model: User,
+          as: "doctor",
+          attributes: ["name", "email"],
+        },
+      ],
+      order: [
+        ["date", "ASC"],
+        ["timeSlot", "ASC"],
+      ],
+    });
+
+    res.json(appointments);
+  } catch (error) {
+    //console.error("Error fetching guest appointments:", error);
+    res.status(500).json({ error: "Failed to fetch appointments" });
   }
 };
 

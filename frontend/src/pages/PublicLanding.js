@@ -18,6 +18,9 @@ const PublicLanding = () => {
         <Button as={Link} to="/guest-booking" variant="success" size="lg">
           Book as Guest
         </Button>
+        <Button as={Link} to="/guest-appointments" variant="info" size="lg">
+          View My Appointments
+        </Button>
       </div>
     </Container>
   );
