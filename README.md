@@ -25,7 +25,7 @@ A full-stack web application for managing medical appointments with support for 
 
 2. Create .env file: i have attach example.env file but dont change port 5000 as frontend depends on it
 
-3. Start development server:
+3. Start two development server:
    ```bash
    npm start
 
