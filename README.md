@@ -29,6 +29,19 @@ A full-stack web application for managing medical appointments with support for 
    ```bash
    npm start
 
+4. Create the admin in your database 
+- if you are using MySQL run this command:
+- INSERT INTO users (name, email, password, role, createdAt, updatedAt)
+   VALUES (
+  'Admin', 
+  'admin@onnmed.com', 
+  '$2b$10$IWsQ17zVvWJXuoQ..6kxKuO4UKLdgVBuMYlPB9qh7EDUHe/q7jwjy',
+  'admin', 
+  NOW(), 
+  NOW()
+);
+- hash the password first using bcrypt.hashSync the above is hashed pass for 123456
+
 ## Project Approach (MVC Architecture)
   - Model-View-Controller Implementation
  
