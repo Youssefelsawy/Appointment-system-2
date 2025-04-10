@@ -6,7 +6,9 @@ const User = sequelize.define(
   {
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: function () {
+        return this.isGuest === true;
+      },
     },
     email: {
       type: DataTypes.STRING,

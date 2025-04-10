@@ -115,7 +115,12 @@ exports.createGuestAppointment = async (req, res) => {
     // Create a guest user if not exists
     let guest = await User.findOne({ where: { email, isGuest: true } });
     if (!guest) {
-      guest = await User.create({ email, isGuest: true, role: "patient" });
+      guest = await User.create({
+        email,
+        name: "Guest User",
+        isGuest: true,
+        role: "patient",
+      });
     }
 
     const existing = await Appointment.findOne({
@@ -140,6 +145,7 @@ exports.createGuestAppointment = async (req, res) => {
       .status(201)
       .json({ message: "Appointment created successfully", appointment });
   } catch (error) {
+    //console.error("Error creating guest appointment:", error); // Log the error for debugging
     res.status(500).json({ error: "Failed to create appointment" });
   }
 };

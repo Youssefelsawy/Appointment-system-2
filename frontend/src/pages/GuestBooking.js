@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const GuestBooking = () => {
   const [formData, setFormData] = useState({
-    guestEmail: "",
+    email: "",
     doctorId: "",
     date: new Date(),
     timeSlot: "",
@@ -49,16 +49,11 @@ const GuestBooking = () => {
     try {
       await axios.post("http://localhost:5000/api/guest/appointment", {
         ...formData,
-        date: formData.date.toISOString().split("T")[0], // format: YYYY-MM-DD
+        date: formData.date.toISOString().split("T")[0],
         token: captchaToken,
       });
-      setSuccess("Appointment request submitted successfully!");
-      setFormData({
-        guestEmail: "",
-        doctorId: "",
-        date: new Date(),
-        timeSlot: "",
-      });
+      setSuccess("Appointment booked successfully!");
+      setFormData({ email: "", doctorId: "", date: new Date(), timeSlot: "" });
       setCaptchaToken("");
     } catch (err) {
       setError(err.response?.data?.error || "Booking failed");
@@ -75,7 +70,7 @@ const GuestBooking = () => {
     <Row className="justify-content-center mt-5">
       <Col md={8}>
         <Card>
-          <Card.Header>Book an Appointment (Guest)</Card.Header>
+          <Card.Header>Guest Appointment Booking</Card.Header>
           <Card.Body>
             {error && <Alert variant="danger">{error}</Alert>}
             {success && <Alert variant="success">{success}</Alert>}
@@ -86,9 +81,9 @@ const GuestBooking = () => {
                 <Form.Control
                   type="email"
                   required
-                  value={formData.guestEmail}
+                  value={formData.email}
                   onChange={(e) =>
-                    setFormData({ ...formData, guestEmail: e.target.value })
+                    setFormData({ ...formData, email: e.target.value })
                   }
                 />
               </Form.Group>
@@ -105,7 +100,7 @@ const GuestBooking = () => {
                   <option value="">Choose a doctor</option>
                   {doctors.map((d) => (
                     <option key={d.id} value={d.id}>
-                      Dr. {d.name}
+                      {d.name}
                     </option>
                   ))}
                 </Form.Select>
@@ -141,13 +136,13 @@ const GuestBooking = () => {
 
               <Form.Group className="mb-3">
                 <ReCAPTCHA
-                  sitekey="YOUR_SITE_KEY"
+                  sitekey="6Lc-IhArAAAAAMjqwLRF9ytByfCWAM05xtr8Zoe3"
                   onChange={(token) => setCaptchaToken(token)}
                 />
               </Form.Group>
 
               <Button variant="primary" type="submit" disabled={!captchaToken}>
-                Submit Request
+                Book Appointment
               </Button>
             </Form>
           </Card.Body>
