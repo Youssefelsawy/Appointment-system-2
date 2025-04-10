@@ -1,4 +1,5 @@
 const { Appointment, User } = require("../models");
+const bcrypt = require("bcrypt");
 
 // Helper function to validate time slots
 const isValidTimeSlot = (timeSlot) => {
@@ -45,6 +46,7 @@ exports.createDoctor = async (req, res) => {
 
     res.status(201).json({ message: "Doctor created successfully", doctor });
   } catch (error) {
+    //console.error("CREATE DOCTOR ERROR:", error); // Log the error for debugging
     res.status(500).json({ error: "Failed to create doctor" });
   }
 };

@@ -23,7 +23,10 @@ router.post("/login", verifyCaptcha, login);
 router.get("/appointments", authenticate, getPatientAppointments);
 router.get("/doctors", authenticate, getAllDoctors);
 router.post("/appointments", authenticate, createPatientAppointment);
-router.post("/appointments/guest", createGuestAppointment);
+
+//guest routes
+router.get("/guest/doctors", getAllDoctors);
+router.post("/guest/appointment", createGuestAppointment);
 
 // Doctor routes
 router.get(

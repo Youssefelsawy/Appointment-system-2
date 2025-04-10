@@ -36,7 +36,7 @@ const Login = () => {
 
       // Redirect based on role
       const redirectPaths = {
-        patient: "/",
+        patient: "/appointments",
         doctor: "/doctor/appointments",
         admin: "/admin/dashboard",
       };

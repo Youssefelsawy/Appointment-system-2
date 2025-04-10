@@ -47,6 +47,17 @@ exports.createPatientAppointment = async (req, res) => {
         .json({ error: "You already have an appointment in this time slot." });
     }
 
+    // Check if the doctor already has an appointment in the same time slot
+    const existingDoctorAppointment = await Appointment.findOne({
+      where: { doctorId, date, timeSlot },
+    });
+
+    if (existingDoctorAppointment) {
+      return res.status(400).json({
+        error: "This doctor is already booked for this time slot.",
+      });
+    }
+
     // Create the appointment
     const appointment = await Appointment.create({
       date,
@@ -105,6 +116,16 @@ exports.createGuestAppointment = async (req, res) => {
     let guest = await User.findOne({ where: { email, isGuest: true } });
     if (!guest) {
       guest = await User.create({ email, isGuest: true, role: "patient" });
+    }
+
+    const existing = await Appointment.findOne({
+      where: { doctorId, date, timeSlot },
+    });
+
+    if (existing) {
+      return res.status(400).json({
+        error: "This doctor is already booked for this time slot.",
+      });
     }
 
     // Create an appointment
