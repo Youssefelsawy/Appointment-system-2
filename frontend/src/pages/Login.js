@@ -38,7 +38,7 @@ const Login = () => {
       const redirectPaths = {
         patient: "/",
         doctor: "/doctor/appointments",
-        admin: "/admin/console",
+        admin: "/admin/dashboard",
       };
 
       navigate(redirectPaths[res.data.user.role] || "/");

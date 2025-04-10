@@ -1,16 +1,34 @@
 import { Link } from "react-router-dom";
 
 const AppointmentCard = ({ appointment, currentRole }) => {
-  const formatDateTime = (dateString) => {
-    const options = {
-      weekday: "short",
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+  const formatDateTime = (dateStr, timeStr) => {
+    if (!dateStr || !timeStr) return "Date not specified";
+
+    try {
+      // Combine date and time into an ISO string
+      const dateTimeStr = `${dateStr}T${timeStr}:00`;
+      const date = new Date(dateTimeStr);
+
+      if (isNaN(date.getTime())) {
+        console.warn("Invalid date:", dateTimeStr);
+        return "Invalid date";
+      }
+
+      const options = {
+        weekday: "short",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      };
+
+      return date.toLocaleString(undefined, options);
+    } catch (error) {
+      console.error("Date formatting error:", error);
+      return "Invalid date format";
+    }
   };
 
   const otherParty =
@@ -22,7 +40,7 @@ const AppointmentCard = ({ appointment, currentRole }) => {
         <div>
           <h3 className="font-semibold text-lg">{otherParty.name}</h3>
           <p className="text-gray-600 mb-2">
-            {formatDateTime(appointment.dateTime)}
+            {formatDateTime(appointment.date, appointment.timeSlot)}
           </p>
           <div className="flex items-center space-x-2 mb-2">
             <span
@@ -37,7 +55,7 @@ const AppointmentCard = ({ appointment, currentRole }) => {
               {appointment.status}
             </span>
             <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">
-              {appointment.type}
+              Appointment
             </span>
           </div>
         </div>
