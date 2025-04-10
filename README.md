@@ -54,6 +54,8 @@ A full-stack web application for managing medical appointments with support for 
 
 - Grant specific Authrization for every role in the system
 
+- Merge Front with Back in short time
+
 ## Pending Items
 - Nothing pending just enhancement 
 
