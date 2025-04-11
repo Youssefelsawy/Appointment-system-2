@@ -7,7 +7,7 @@ const authRoutes = require("./routes/authRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 
 const app = express();
-sequelize.sync({ alter: true });
+//sequelize.sync({ alter: true });  // this for the first time only to sync the tables in the database based on the modles later we do migrations to track the changes in the models and update the database accordingly
 
 // Middleware
 app.use(cors());
