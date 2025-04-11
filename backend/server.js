@@ -1,12 +1,13 @@
 const express = require("express");
 const cors = require("cors");
-const sequelize = require("./config/database");
+const sequelize = require("./config/sequelize");
 require("dotenv").config();
 
 const authRoutes = require("./routes/authRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 
 const app = express();
+sequelize.sync({ alter: true });
 
 // Middleware
 app.use(cors());

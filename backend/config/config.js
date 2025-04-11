@@ -1,11 +1,14 @@
+// config/config.js
+require("dotenv").config();
+
 module.exports = {
   development: {
-    dialect: "postgres",
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT || 5432,
-    database: process.env.DB_NAME,
     username: process.env.DB_USER,
     password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
+    host: process.env.DB_HOST,
+    dialect: "postgres", // Change from mysql to postgres for deployment on render
+    port: process.env.DB_PORT,
     dialectOptions: {
       ssl: {
         require: true,
@@ -14,12 +17,8 @@ module.exports = {
     },
   },
   production: {
+    use_env_variable: process.env.DATABASE_URL, // Use full connection string
     dialect: "postgres",
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT || 5432,
-    database: process.env.DB_NAME,
-    username: process.env.DB_USER,
-    password: process.env.DB_PASS,
     dialectOptions: {
       ssl: {
         require: true,
