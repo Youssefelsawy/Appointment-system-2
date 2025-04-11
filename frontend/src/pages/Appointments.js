@@ -26,9 +26,9 @@ const Appointments = () => {
         // Determine endpoint based on role
         let endpoint = `${process.env.REACT_APP_BACKEND_URL}/api/appointments`;
         if (decoded.role === "patient") {
-          endpoint = `${process.env.REACT_APP_BACKEND_URL}/appointments`;
+          endpoint = `${process.env.REACT_APP_BACKEND_URL}/api/appointments`;
         } else if (decoded.role === "doctor") {
-          endpoint = `${process.env.REACT_APP_BACKEND_URL}/doctors/appointments`;
+          endpoint = `${process.env.REACT_APP_BACKEND_URL}/api/appointments/doctor`;
         }
 
         // Make API request
@@ -38,13 +38,24 @@ const Appointments = () => {
           },
         });
 
+        // Handle empty response
+        if (!response.data) {
+          setAppointments([]);
+          return;
+        }
+
         setAppointments(response.data);
       } catch (err) {
-        setError(
-          err.response?.data?.error ||
-            err.message ||
-            "Failed to fetch appointments"
-        );
+        if (err.response?.status === 404) {
+          // Handle 404 (no appointments) as empty array, not error
+          setAppointments([]);
+        } else {
+          setError(
+            err.response?.data?.error ||
+              err.message ||
+              "Failed to fetch appointments"
+          );
+        }
       } finally {
         setLoading(false);
       }
