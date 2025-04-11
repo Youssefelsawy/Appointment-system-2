@@ -29,7 +29,7 @@ const GuestAppointments = () => {
 
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/guest/appointments`,
+        `${process.env.BACKEND_URL}/api/guest/appointments`,
         {
           params: { email },
         }

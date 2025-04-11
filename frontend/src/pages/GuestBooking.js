@@ -32,7 +32,9 @@ const GuestBooking = () => {
 
   const fetchDoctors = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/guest/doctors");
+      const res = await axios.get(
+        `${process.env.BACKEND_URL}/api/guest/doctors`
+      );
       setDoctors(res.data);
     } catch {
       setError("Failed to load doctors");
@@ -47,7 +49,7 @@ const GuestBooking = () => {
     setSuccess("");
 
     try {
-      await axios.post("http://localhost:5000/api/guest/appointment", {
+      await axios.post(`${process.env.BACKEND_URL}/api/guest/appointment`, {
         ...formData,
         date: formData.date.toISOString().split("T")[0],
         token: captchaToken,

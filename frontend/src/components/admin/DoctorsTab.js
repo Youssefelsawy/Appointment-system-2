@@ -29,7 +29,7 @@ const DoctorsTab = () => {
   const fetchDoctors = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/admin/doctors", {
+      const res = await axios.get(`${process.env.BACKEND_URL}/admin/doctors`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setDoctors(res.data);
@@ -45,7 +45,7 @@ const DoctorsTab = () => {
     setError("");
 
     try {
-      await axios.post("http://localhost:5000/admin/doctors", newDoctor, {
+      await axios.post(`${process.env.BACKEND_URL}/admin/doctors`, newDoctor, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setShowAdd(false);
@@ -59,7 +59,7 @@ const DoctorsTab = () => {
   const handleDeleteDoctor = async (id) => {
     if (!window.confirm("Are you sure you want to delete this doctor?")) return;
     try {
-      await axios.delete(`http://localhost:5000/admin/doctors/${id}`, {
+      await axios.delete(`${process.env.BACKEND_URL}/admin/doctors/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchDoctors();
@@ -74,7 +74,7 @@ const DoctorsTab = () => {
 
     try {
       await axios.put(
-        `http://localhost:5000/admin/doctors/${selectedDoctor.id}`,
+        `${process.env.BACKEND_URL}/admin/doctors/${selectedDoctor.id}`,
         {
           name: selectedDoctor.name,
           email: selectedDoctor.email,

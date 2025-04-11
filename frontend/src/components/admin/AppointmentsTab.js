@@ -41,13 +41,13 @@ const AppointmentsTab = () => {
   const fetchAll = async () => {
     try {
       const [a, p, d] = await Promise.all([
-        axios.get("http://localhost:5000/admin/appointments", {
+        axios.get(`${process.env.BACKEND_URL}/admin/appointments`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get("http://localhost:5000/admin/patients", {
+        axios.get(`${process.env.BACKEND_URL}/admin/patients`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get("http://localhost:5000/admin/doctors", {
+        axios.get(`${process.env.BACKEND_URL}/admin/doctors`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
@@ -62,9 +62,12 @@ const AppointmentsTab = () => {
   const deleteAppointment = async (id) => {
     if (!window.confirm("Delete this appointment?")) return;
     try {
-      await axios.delete(`http://localhost:5000/admin/appointments/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.delete(
+        `${process.env.BACKEND_URL}/admin/appointments/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       fetchAll();
     } catch {
       setError("Failed to delete");
@@ -74,9 +77,13 @@ const AppointmentsTab = () => {
   const createAppointment = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/admin/appointments", formData, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.post(
+        `${process.env.BACKEND_URL}/admin/appointments`,
+        formData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setShowCreate(false);
       setFormData({ date: "", timeSlot: "", doctorId: "", patientId: "" });
       fetchAll();

@@ -12,7 +12,7 @@ const DoctorSchedule = () => {
   const fetchAppointments = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/doctor/appointments",
+        `${process.env.BACKEND_URL}/api/doctor/appointments`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -27,7 +27,7 @@ const DoctorSchedule = () => {
     try {
       setUpdating(appointmentId);
       await axios.put(
-        "http://localhost:5000/api/doctor/appointments/status",
+        `${process.env.BACKEND_URL}/api/doctor/appointments/status`,
         { appointmentId, status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -45,7 +45,7 @@ const Register = () => {
 
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:5000/api/register", {
+      const res = await axios.post(`${process.env.BACKEND_URL}/api/register`, {
         ...formData,
         recaptchaToken, // Send to backend for verification
       });

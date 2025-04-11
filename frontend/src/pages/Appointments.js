@@ -26,7 +26,7 @@ const Appointments = () => {
         // Determine endpoint based on role
         let endpoint = "http://localhost:5000/api/appointments";
         if (decoded.role === "patient") {
-          endpoint = `http://localhost:5000/api/appointments`;
+          endpoint = `${process.env.BACKEND_URL}/appointments`;
         } else if (decoded.role === "doctor") {
           endpoint = `http://localhost:5000/api/doctors/appointments`;
         }

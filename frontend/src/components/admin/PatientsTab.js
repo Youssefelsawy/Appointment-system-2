@@ -11,7 +11,7 @@ const PatientsTab = () => {
 
   const fetchPatients = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/admin/patients", {
+      const res = await axios.get(`${process.env.BACKEND_URL}/admin/patients`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPatients(res.data);
@@ -25,7 +25,7 @@ const PatientsTab = () => {
   const deletePatient = async (id) => {
     if (!window.confirm("Delete this patient?")) return;
     try {
-      await axios.delete(`http://localhost:5000/admin/patients/${id}`, {
+      await axios.delete(`${process.env.BACKEND_URL}/admin/patients/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchPatients();

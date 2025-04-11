@@ -26,7 +26,7 @@ const PatientAppointmentForm = () => {
       try {
         //console.log("TOKEN:", localStorage.getItem("token"));
 
-        const res = await axios.get("http://localhost:5000/api/doctors", {
+        const res = await axios.get(`${process.env.BACKEND_URL}/api/doctors`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -54,7 +54,7 @@ const PatientAppointmentForm = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/appointments",
+        `${process.env.BACKEND_URL}/api/appointments`,
         formData,
         {
           headers: {
