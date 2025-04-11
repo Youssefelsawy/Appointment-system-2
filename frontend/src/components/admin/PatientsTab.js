@@ -11,9 +11,12 @@ const PatientsTab = () => {
 
   const fetchPatients = async () => {
     try {
-      const res = await axios.get(`${process.env.BACKEND_URL}/admin/patients`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/admin/patients`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setPatients(res.data);
     } catch (err) {
       setError("Failed to load patients");
@@ -25,9 +28,12 @@ const PatientsTab = () => {
   const deletePatient = async (id) => {
     if (!window.confirm("Delete this patient?")) return;
     try {
-      await axios.delete(`${process.env.BACKEND_URL}/admin/patients/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.delete(
+        `${process.env.REACT_APP_BACKEND_URL}/admin/patients/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       fetchPatients();
     } catch (err) {
       setError("Failed to delete patient");

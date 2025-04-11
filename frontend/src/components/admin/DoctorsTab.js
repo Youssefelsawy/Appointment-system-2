@@ -29,9 +29,12 @@ const DoctorsTab = () => {
   const fetchDoctors = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`${process.env.BACKEND_URL}/admin/doctors`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/admin/doctors`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setDoctors(res.data);
     } catch (err) {
       setError("Failed to fetch doctors");
@@ -45,9 +48,13 @@ const DoctorsTab = () => {
     setError("");
 
     try {
-      await axios.post(`${process.env.BACKEND_URL}/admin/doctors`, newDoctor, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/admin/doctors`,
+        newDoctor,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setShowAdd(false);
       setNewDoctor({ name: "", email: "", password: "" });
       fetchDoctors();
@@ -59,9 +66,12 @@ const DoctorsTab = () => {
   const handleDeleteDoctor = async (id) => {
     if (!window.confirm("Are you sure you want to delete this doctor?")) return;
     try {
-      await axios.delete(`${process.env.BACKEND_URL}/admin/doctors/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.delete(
+        `${process.env.REACT_APP_BACKEND_URL}/admin/doctors/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       fetchDoctors();
     } catch (err) {
       setError("Failed to delete doctor");
@@ -74,7 +84,7 @@ const DoctorsTab = () => {
 
     try {
       await axios.put(
-        `${process.env.BACKEND_URL}/admin/doctors/${selectedDoctor.id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/admin/doctors/${selectedDoctor.id}`,
         {
           name: selectedDoctor.name,
           email: selectedDoctor.email,

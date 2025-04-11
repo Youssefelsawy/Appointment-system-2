@@ -41,13 +41,13 @@ const AppointmentsTab = () => {
   const fetchAll = async () => {
     try {
       const [a, p, d] = await Promise.all([
-        axios.get(`${process.env.BACKEND_URL}/admin/appointments`, {
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/admin/appointments`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get(`${process.env.BACKEND_URL}/admin/patients`, {
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/admin/patients`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get(`${process.env.BACKEND_URL}/admin/doctors`, {
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/admin/doctors`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
@@ -63,7 +63,7 @@ const AppointmentsTab = () => {
     if (!window.confirm("Delete this appointment?")) return;
     try {
       await axios.delete(
-        `${process.env.BACKEND_URL}/admin/appointments/${id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/admin/appointments/${id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -78,7 +78,7 @@ const AppointmentsTab = () => {
     e.preventDefault();
     try {
       await axios.post(
-        `${process.env.BACKEND_URL}/admin/appointments`,
+        `${process.env.REACT_APP_BACKEND_URL}/admin/appointments`,
         formData,
         {
           headers: { Authorization: `Bearer ${token}` },

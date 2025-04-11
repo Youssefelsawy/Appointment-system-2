@@ -25,10 +25,13 @@ const Login = () => {
 
     setLoading(true);
     try {
-      const res = await axios.post(`${process.env.BACKEND_URL}/api/login`, {
-        ...formData,
-        recaptchaToken,
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/api/login`,
+        {
+          ...formData,
+          recaptchaToken,
+        }
+      );
 
       // Store authentication data
       localStorage.setItem("token", res.data.token);

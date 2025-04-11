@@ -24,11 +24,11 @@ const Appointments = () => {
         setUserRole(decoded.role);
 
         // Determine endpoint based on role
-        let endpoint = "http://localhost:5000/api/appointments";
+        let endpoint = `${process.env.REACT_APP_BACKEND_URL}/api/appointments`;
         if (decoded.role === "patient") {
-          endpoint = `${process.env.BACKEND_URL}/appointments`;
+          endpoint = `${process.env.REACT_APP_BACKEND_URL}/appointments`;
         } else if (decoded.role === "doctor") {
-          endpoint = `http://localhost:5000/api/doctors/appointments`;
+          endpoint = `${process.env.REACT_APP_BACKEND_URL}/doctors/appointments`;
         }
 
         // Make API request

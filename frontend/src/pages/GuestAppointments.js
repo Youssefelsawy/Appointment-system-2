@@ -29,7 +29,7 @@ const GuestAppointments = () => {
 
     try {
       const res = await axios.get(
-        `${process.env.BACKEND_URL}/api/guest/appointments`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/guest/appointments`,
         {
           params: { email },
         }

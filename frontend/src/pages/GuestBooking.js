@@ -33,7 +33,7 @@ const GuestBooking = () => {
   const fetchDoctors = async () => {
     try {
       const res = await axios.get(
-        `${process.env.BACKEND_URL}/api/guest/doctors`
+        `${process.env.REACT_APP_BACKEND_URL}/api/guest/doctors`
       );
       setDoctors(res.data);
     } catch {
@@ -49,11 +49,14 @@ const GuestBooking = () => {
     setSuccess("");
 
     try {
-      await axios.post(`${process.env.BACKEND_URL}/api/guest/appointment`, {
-        ...formData,
-        date: formData.date.toISOString().split("T")[0],
-        token: captchaToken,
-      });
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/api/guest/appointment`,
+        {
+          ...formData,
+          date: formData.date.toISOString().split("T")[0],
+          token: captchaToken,
+        }
+      );
       setSuccess("Appointment booked successfully!");
       setFormData({ email: "", doctorId: "", date: new Date(), timeSlot: "" });
       setCaptchaToken("");

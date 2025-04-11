@@ -26,11 +26,14 @@ const PatientAppointmentForm = () => {
       try {
         //console.log("TOKEN:", localStorage.getItem("token"));
 
-        const res = await axios.get(`${process.env.BACKEND_URL}/api/doctors`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const res = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/api/doctors`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
         setDoctors(res.data);
       } catch (err) {
         setError("Failed to load doctors");
@@ -54,7 +57,7 @@ const PatientAppointmentForm = () => {
 
     try {
       const res = await axios.post(
-        `${process.env.BACKEND_URL}/api/appointments`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/appointments`,
         formData,
         {
           headers: {
