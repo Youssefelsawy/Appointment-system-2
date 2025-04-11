@@ -55,7 +55,7 @@ const Register = () => {
       );
 
       localStorage.setItem("token", res.data.token);
-      navigate("/login");
+      navigate("/");
     } catch (err) {
       setError(err.response?.data?.error || "Registration failed");
     } finally {
