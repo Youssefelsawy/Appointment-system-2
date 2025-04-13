@@ -17,7 +17,7 @@ A full-stack web application for managing medical appointments with support for 
 ### Backend - frontend Setup
 - I have deployed the website, backend on RailWay, frontend on Netlify and Database on Neon.tech
 - And this is the website link: https://onnmed-appointment-system.netlify.app/
-- Admin credentials -> email: admin@onnmed.com      password: 123456
+- Admin credentials to login as an admin -> email: admin@onnmed.com      password: 123456
 
 ## Project Approach (MVC Architecture)
   - Model-View-Controller Implementation
@@ -32,6 +32,8 @@ A full-stack web application for managing medical appointments with support for 
 - Grant specific Authrization for every role in the system
 
 - Merge Front with Back in short time
+
+- the whole process required to be completed in 48h
 
 ## Pending Items
 - Nothing pending just enhancement 
