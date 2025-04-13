@@ -194,7 +194,7 @@ const AppointmentsTab = () => {
                 <option value="">Choose Doctor</option>
                 {doctors.map((doc) => (
                   <option key={doc.id} value={doc.id}>
-                    {doc.name}
+                   Dr. {doc.name}
                   </option>
                 ))}
               </Form.Select>
